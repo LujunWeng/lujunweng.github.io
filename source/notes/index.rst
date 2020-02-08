@@ -1,0 +1,9 @@
+notes
+=====
+
+.. toctree::
+   :titlesonly:
+   :glob:
+
+   *
+   **/*
