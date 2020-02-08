@@ -1,5 +1,5 @@
 SPHINXBUILD   ?= sphinx-build
-SOURCEDIR     = source
+SOURCEDIR     = .
 BUILDDIR      = docs
 .DEFAULT_GOAL = html
 
