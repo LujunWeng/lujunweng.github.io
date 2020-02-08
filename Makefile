@@ -1,6 +1,6 @@
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
-BUILDDIR      = .
+BUILDDIR      = docs
 .DEFAULT_GOAL = html
 
 html: Makefile
