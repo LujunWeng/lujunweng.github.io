@@ -31,24 +31,23 @@ void thread_d(int max) { d = 0; for (int i = 0; i < max; ++i) ++d; }
 
 int main(void)
 {
-				for (int i = 0, max = 8; i < 14; ++i, max <<= 2) {
-								auto begin = std::chrono::high_resolution_clock::now();
-								std::thread ta(thread_a, max);
-								std::thread tb(thread_b, max);
-								ta.join(); tb.join();
-								auto end = std::chrono::high_resolution_clock::now();
-								auto nopad = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-								
-								begin = std::chrono::high_resolution_clock::now();
-								std::thread tc(thread_c, max);
-								std::thread td(thread_d, max);
-								tc.join(); td.join();
-								end = std::chrono::high_resolution_clock::now();
-								auto pad = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-
-								std::cout << setw(20) << max
-												      << setw(20) << nopad.count()
-																		<< setw(20) << pad.count()
-																		<< std::endl;
-				}
+    for (int i = 0, max = 8; i < 14; ++i, max <<= 2) {
+        auto begin = std::chrono::high_resolution_clock::now();
+        std::thread ta(thread_a, max);
+        std::thread tb(thread_b, max);
+        ta.join(); tb.join();
+        auto end = std::chrono::high_resolution_clock::now();
+        auto nopad = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);								
+        begin = std::chrono::high_resolution_clock::now();
+        std::thread tc(thread_c, max);
+        std::thread td(thread_d, max);
+        tc.join(); td.join();
+        end = std::chrono::high_resolution_clock::now();
+        auto pad = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
+        
+        std::cout << setw(20) << max
+                  << setw(20) << nopad.count()
+                  << setw(20) << pad.count()
+                  << std::endl;
+    }
 }
