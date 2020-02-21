@@ -1,10 +1,8 @@
-====
-blog
+2020
 ====
 
 .. toctree::
    :titlesonly:
    :glob:
 
-   2019/index
-   2020/index
+   *

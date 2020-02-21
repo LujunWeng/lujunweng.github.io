@@ -20,7 +20,7 @@
 project = 'Things Public'
 copyright = '2020, Lujun Weng'
 author = 'Lujun Weng'
-
+master_doc = 'index'
 
 # -- General configuration ---------------------------------------------------
 
