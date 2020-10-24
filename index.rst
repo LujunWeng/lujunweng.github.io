@@ -4,3 +4,4 @@
 
    blog/index
    notes/index
+   bookshelf/index
