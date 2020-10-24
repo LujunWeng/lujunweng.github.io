@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Things Public'
+project = "LW's Home"
 copyright = '2020, Lujun Weng'
 author = 'Lujun Weng'
 master_doc = 'index'

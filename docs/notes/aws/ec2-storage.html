@@ -1,12 +1,10 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Notes for EC2 Storage &#8212; Things Public  documentation</title>
+    <meta charset="utf-8" />
+    <title>Notes for EC2 Storage &#8212; LW&#39;s Home  documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -39,15 +37,14 @@
 <div class="section" id="common">
 <h2>Common<a class="headerlink" href="#common" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li>Device naming could be changed over configuration and actual instance.</li>
+<li><p>Device naming could be changed over configuration and actual instance.</p></li>
 </ol>
 </div>
 <div class="section" id="amazon-elastic-block-store">
 <h2>Amazon Elastic Block Store<a class="headerlink" href="#amazon-elastic-block-store" title="Permalink to this headline">¶</a></h2>
 <ol>
-<li><p class="first">It is durable, block-level storage volumes and recommended for database</p>
-</li>
-<li><p class="first">Can one volume be attached to multiple instances?</p>
+<li><p>It is durable, block-level storage volumes and recommended for database</p></li>
+<li><p>Can one volume be attached to multiple instances?</p>
 <blockquote>
 <div><p>An EBS volume can be attached to only one instance at a time, but multiple volumes can be attached to a single instance.</p>
 </div></blockquote>
@@ -57,14 +54,14 @@
 <div class="section" id="amazon-ec2-instance-store">
 <h2>Amazon EC2 Instance Store<a class="headerlink" href="#amazon-ec2-instance-store" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li>Instance’s own storage; it’s temporary and data will be lost when instance stopped or terminated</li>
+<li><p>Instance’s own storage; it’s temporary and data will be lost when instance stopped or terminated</p></li>
 </ol>
 </div>
 <div class="section" id="amazon-efs-file-system">
 <h2>Amazon EFS File System<a class="headerlink" href="#amazon-efs-file-system" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li>scalable file storage and needs be mounted.</li>
-<li>can work as a common data source for multiple instances</li>
+<li><p>scalable file storage and needs be mounted.</p></li>
+<li><p>can work as a common data source for multiple instances</p></li>
 </ol>
 </div>
 <div class="section" id="amazon-s3">
@@ -73,8 +70,8 @@
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li><a class="reference external" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html">Storage, User Guide</a></li>
-<li><a class="reference external" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html">Device Naming</a></li>
+<li><p><a class="reference external" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html">Storage, User Guide</a></p></li>
+<li><p><a class="reference external" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html">Device Naming</a></p></li>
 </ol>
 </div>
 </div>
@@ -86,7 +83,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../index.html">Things Public</a></h1>
+<h1 class="logo"><a href="../../index.html">LW's Home</a></h1>
 
 
 
@@ -97,7 +94,8 @@
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../blog/index.html">blog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../blog/2020/index.html">2020</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../blog/2019/index.html">2019</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">notes</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../bitwise-operation.html">Bitwise Operation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../jmeter.html">Notes for Using JMeter</a></li>
@@ -119,13 +117,11 @@
 </ul>
 </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
@@ -146,7 +142,7 @@
       &copy;2020, Lujun Weng.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
