@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>General Notes on Golang &#8212; LW&#39;s Home  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bookshelf" href="../../bookshelf/index.html" />
+    <link rel="prev" title="Data Management" href="../docker/data-management.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="general-notes-on-golang">
+<h1>General Notes on Golang<a class="headerlink" href="#general-notes-on-golang" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basics">
+<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
+<p>Go code &lt;- packages &lt;- Go files <strong>in a directory</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">package</span> <span class="pre">main</span></code> is for executable program only and <code class="docutils literal notranslate"><span class="pre">func</span> <span class="pre">main()</span> <span class="pre">{}</span></code> is the entry point of the program.</p>
+<p>Newlines with certain tokens is similar with semicolons in C. Therefore, where to break lines is significant.</p>
+<div class="section" id="command-arguments">
+<h3>Command Arguments<a class="headerlink" href="#command-arguments" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">os.Args</span></code> -&gt; a slice of strings. <code class="docutils literal notranslate"><span class="pre">os.Args[0]</span></code> is the program name.</p>
+</div>
+<div class="section" id="variable-and-const">
+<h3>Variable and Const<a class="headerlink" href="#variable-and-const" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="p">:</span><span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">var</span> <span class="n">s</span> <span class="n">string</span>
+<span class="n">var</span> <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">var</span> <span class="n">s</span> <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">var</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="nb">int</span>                 <span class="o">//</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span>
+<span class="n">var</span> <span class="n">b</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">true</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="s2">&quot;four&quot;</span> <span class="o">//</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">float64</span><span class="p">,</span> <span class="n">string</span>
+<span class="n">var</span> <span class="n">f</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">//</span> <span class="n">os</span><span class="o">.</span><span class="n">Open</span> <span class="n">returns</span> <span class="n">a</span> <span class="n">file</span> <span class="ow">and</span> <span class="n">an</span> <span class="n">error</span>
+<span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">//</span> <span class="n">swap</span> <span class="n">values</span> <span class="n">of</span> <span class="n">i</span> <span class="ow">and</span> <span class="n">j</span>
+</pre></div>
+</div>
+<p>If not value is provided to initialize the varialbe, <strong>zero value</strong> is used.</p>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">:=</span></code> is different from <code class="docutils literal notranslate"><span class="pre">=</span></code> assignment.</p>
+<p>“One subtle but important point: a short variable declaration does not necessarily
+declare all the variables on its left-hand side. If some of them were already
+declared in the <strong>same lexical block (§2.7)</strong>, then the short variable declaration
+acts like an assignment to those variables.”
+– The Go Programming Language</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="p">(</span>
+    <span class="n">C1</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">C2</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">)</span>
+<span class="n">const</span> <span class="n">C1</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="zero-value">
+<h3>Zero Value<a class="headerlink" href="#zero-value" title="Permalink to this headline">¶</a></h3>
+<p>numbers: 0
+boolean: false
+string: “”
+interface: nil
+reference types (slice, pointer, map, channel, function): nil</p>
+<p>“in Go there is no such thing as an uninitialized variable.”
+– The Go Programming Language.</p>
+</div>
+<div class="section" id="struct">
+<h3>struct<a class="headerlink" href="#struct" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">struct</span></code> can be initialized with <em>composite literals</em>, like <code class="docutils literal notranslate"><span class="pre">gif.GIF{...}</span></code>.
+Fields that are not set have <strong>zero value</strong>.</p>
+</div>
+<div class="section" id="if-switch">
+<h3>If &amp; Switch<a class="headerlink" href="#if-switch" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">{</span>
+
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">switch</span> <span class="n">s</span> <span class="p">{</span>
+<span class="n">case</span> <span class="s2">&quot;a&quot;</span><span class="p">:</span>
+    <span class="o">//</span> <span class="n">no</span> <span class="n">fallthrough</span>
+    <span class="n">a</span><span class="o">++</span>
+<span class="n">case</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span>
+    <span class="n">b</span><span class="o">++</span>
+<span class="n">default</span><span class="p">:</span>
+    <span class="n">c</span><span class="o">++</span>
+<span class="p">}</span>
+<span class="n">switch</span> <span class="p">{</span>
+<span class="n">case</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">++</span>
+<span class="n">default</span><span class="p">:</span>
+    <span class="n">b</span><span class="o">++</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loop">
+<h3>Loop<a class="headerlink" href="#loop" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">infinite</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="p">:</span><span class="o">=</span> <span class="nb">range</span> <span class="n">os</span><span class="o">.</span><span class="n">Args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="nb">range</span> <span class="n">usage</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="naming-visibility">
+<h3>Naming &amp; Visibility<a class="headerlink" href="#naming-visibility" title="Permalink to this headline">¶</a></h3>
+<p>Naming is related to visibility at package level in Go. A name begins with a
+upper-case letter will be exported by its package.</p>
+<p>Naming style lean towards simple names for local variables, camel case for
+composite names and acronyms are rendered in the same case (such as “html” or
+“HTML”).</p>
+</div>
+<div class="section" id="pointer">
+<h3>Pointer<a class="headerlink" href="#pointer" title="Permalink to this headline">¶</a></h3>
+<p>It is okay to return the address of an local variable in a function. Each call
+to the function yields a different address (different variable therefore).</p>
+<p><code class="docutils literal notranslate"><span class="pre">new</span></code> can create a pointer to a unamed variable of a specific type, such as
+<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">:=</span> <span class="pre">new(int)</span></code>. The initial value is <strong>zero value</strong>. Not used often though,
+as the following is used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="p">:</span><span class="o">=</span> <span class="o">&amp;</span><span class="n">Point</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+<span class="o">//</span> <span class="n">equals</span> <span class="n">to</span>
+<span class="n">p</span> <span class="p">:</span><span class="o">=</span> <span class="n">new</span><span class="p">(</span><span class="n">Point</span><span class="p">)</span>
+<span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="command-data-structures">
+<h2>Command Data Structures<a class="headerlink" href="#command-data-structures" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="map">
+<h3>Map<a class="headerlink" href="#map" title="Permalink to this headline">¶</a></h3>
+<p>A map, like <code class="docutils literal notranslate"><span class="pre">map[string]string</span></code> is passed by reference. (Not a consistent
+desgin. Especially when you only look at paramemters of functions which
+consist of pointers, maps etc). Or not really, if regarding a map as a struct
+with internal pointers, then we pass value for the struct, but reference for
+the map.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">LW's Home</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../blog/2020/index.html">2020</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../blog/2019/index.html">2019</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">notes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../bitwise-operation.html">Bitwise Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jmeter.html">Notes for Using JMeter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aws/ec2-storage.html">Notes for EC2 Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docker/data-management.html">Data Management</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">General Notes on Golang</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bookshelf/index.html">Bookshelf</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">notes</a><ul>
+      <li>Previous: <a href="../docker/data-management.html" title="previous chapter">Data Management</a></li>
+      <li>Next: <a href="../../bookshelf/index.html" title="next chapter">Bookshelf</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Lujun Weng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
