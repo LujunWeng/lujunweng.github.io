@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Notes for Golang General &#8212; LW&#39;s Home  documentation</title>
+    <title>General Notes &#8212; LW&#39;s Home  documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -32,8 +32,8 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="notes-for-golang-general">
-<h1>Notes for Golang General<a class="headerlink" href="#notes-for-golang-general" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="general-notes">
+<h1>General Notes<a class="headerlink" href="#general-notes" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="basics">
 <h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
 <p>Go code &lt;- packages &lt;- Go files <strong>in a directory</strong></p>
@@ -68,6 +68,16 @@ acts like an assignment to those variables.”
 <span class="p">)</span>
 <span class="n">const</span> <span class="n">C1</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
+</div>
+<div class="section" id="lifetime">
+<h4>Lifetime<a class="headerlink" href="#lifetime" title="Permalink to this headline">¶</a></h4>
+<p>“The lifetime of a package-level variable is the entire execution of the program.
+By contrast, local variables have dynamic lifetimes: a new instance is created
+each time the declaration statement is executed, and the variable lives on until
+it becomes unreachable, at which point its storage may be recycled. Function
+parameters and results are local variables too; they are created each time
+their enclosing function is called.”
+– The Go Programming Language</p>
 </div>
 </div>
 <div class="section" id="zero-value">
@@ -134,13 +144,24 @@ Fields that are not set have <strong>zero value</strong>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="p">:</span><span class="o">=</span> <span class="nb">range</span> <span class="n">os</span><span class="o">.</span><span class="n">Args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="p">{</span>
     <span class="o">//</span> <span class="nb">range</span> <span class="n">usage</span>
 <span class="p">}</span>
+<span class="k">for</span> <span class="nb">range</span> <span class="n">os</span><span class="o">.</span><span class="n">Args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">just</span> <span class="k">for</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span>
+<span class="p">}</span>
 </pre></div>
 </div>
+<p>Better not to use variables between <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">{</span></code> in a function value inside
+the loop body. Why? The function value will capture the variables, however,
+the variables will be updated in each iteration. As loop body is itself a
+block scope, one can assign those variables to variables inside the loop body
+to be captured inside a function value.</p>
+<p>See 5.6.1 in The Go Programming Language</p>
 </div>
 <div class="section" id="naming-visibility">
 <h3>Naming &amp; Visibility<a class="headerlink" href="#naming-visibility" title="Permalink to this headline">¶</a></h3>
 <p>Naming is related to visibility at package level in Go. A name begins with a
-upper-case letter will be exported by its package.</p>
+upper-case letter will be exported by its package, including struct, interface,
+function, variable and method. Unexported fields in struct can be accessed
+within the package, but not outside of the package.</p>
 <p>Naming style lean towards simple names for local variables, camel case for
 composite names and acronyms are rendered in the same case (such as “html” or
 “HTML”).</p>
@@ -159,16 +180,153 @@ as the following is used:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="assignment">
+<h3>Assignment<a class="headerlink" href="#assignment" title="Permalink to this headline">¶</a></h3>
+<p>Multiple variables can appear in an assignment. All expressions on right-hand
+side are evaluated before any variable is updated on the left-hand side, which
+makes that we can do swap like <code class="docutils literal notranslate"><span class="pre">i,</span> <span class="pre">j</span> <span class="pre">=</span> <span class="pre">j,</span> <span class="pre">i</span></code>.</p>
 </div>
-<div class="section" id="command-data-structures">
-<h2>Command Data Structures<a class="headerlink" href="#command-data-structures" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="conversion">
+<h3>Conversion<a class="headerlink" href="#conversion" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">Celsius</span> <span class="n">float64</span>
+<span class="nb">type</span> <span class="n">Fahrenheit</span> <span class="n">float64</span>
+</pre></div>
+</div>
+<p>Conversion is available when types have the same underlying type,
+<code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">:=</span> <span class="pre">Celsius(10.0)</span></code>.</p>
+</div>
+<div class="section" id="function">
+<h3>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h3>
+<p>A named result list is allowed, all of which are initialized with <strong>zero value</strong>.</p>
+<p>Default parameters are not supported and arguments are passed by value.</p>
+<p>Function literal can be used within an expression, <code class="docutils literal notranslate"><span class="pre">func</span> <span class="pre">(arg)</span> <span class="pre">res</span> <span class="pre">{}</span></code>, anonymous
+function.</p>
+</div>
+<div class="section" id="method">
+<h3>Method<a class="headerlink" href="#method" title="Permalink to this headline">¶</a></h3>
+<p>A method can have a named type receiver or pointer to a named type receiver.
+However, named type receiver itself cannot have a pointer type as its underlying
+type.</p>
+<p>A method can be assigned to a variable. If the receiver is the type name, the
+assigned variable can be called with the first argument as the receiver.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span> <span class="p">:</span><span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">Distance</span>
+<span class="n">foo</span> <span class="p">:</span><span class="o">=</span> <span class="n">Point</span><span class="o">.</span><span class="n">Distance</span>    <span class="o">//</span> <span class="n">foo</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">foo</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">Point</span><span class="p">)</span><span class="o">.</span><span class="n">Distance</span> <span class="o">//</span> <span class="n">foo</span><span class="p">(</span><span class="o">&amp;</span><span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interface">
+<h3>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h3>
+<p>A type T might not satisfy an interface, however *T might.</p>
+<p>One can assign any value to the empty interface, even a value of basic type.</p>
+<p>Interface is comparable and can be key of a map. Interface equals to <code class="docutils literal notranslate"><span class="pre">nil</span></code> when
+both type and value are <code class="docutils literal notranslate"><span class="pre">nil</span></code>s. If its type is not and its value is, it does
+not equal to <code class="docutils literal notranslate"><span class="pre">nil</span></code>.</p>
+</div>
+<div class="section" id="package-import">
+<h3>Package &amp; Import<a class="headerlink" href="#package-import" title="Permalink to this headline">¶</a></h3>
+<p>“Within a Go program, every package is identified by a unique string called
+its import path.” – The Go Programming Language</p>
+<p>An natural question is in what situation two files are in the same package?
+My current assumption is they are in the same directory, so that <code class="docutils literal notranslate"><span class="pre">import</span></code>
+can indentify it. Also, they should declare the same <code class="docutils literal notranslate"><span class="pre">package</span></code> name. Usually,
+one package in one directory, except we can have test package inside it. This
+also means one package should not cover multiple directories.</p>
+<p><strong>Blank import</strong> comes with renaming a package as <code class="docutils literal notranslate"><span class="pre">_</span></code>. The package then is
+initilized, but not used. Within the package’s init, the package can register
+itself to be refered by other packages.</p>
+<div class="section" id="package-initialization">
+<h4>Package Initialization<a class="headerlink" href="#package-initialization" title="Permalink to this headline">¶</a></h4>
+<p>A <code class="docutils literal notranslate"><span class="pre">.go</span></code> file can have any number (including 0) of <code class="docutils literal notranslate"><span class="pre">func</span> <span class="pre">init()</span> <span class="pre">{</span> <span class="pre">}</span></code> to init
+package-level variables. The <code class="docutils literal notranslate"><span class="pre">init</span></code> functions are called in the order of
+declaration.</p>
+<p>“A package with no imports is initialized by assigning initial values to
+all its package-level variables followed by calling all init functions in
+the order they appear in the source, possibly in multiple files, as presented
+to the compiler.” – Golang Spec</p>
+<p>From what I understand, there is an order but not enforced. It really depends
+on how the build system present files to the compiler.</p>
+</div>
+</div>
+</div>
+<div class="section" id="common-data-structures">
+<h2>Common Data Structures<a class="headerlink" href="#common-data-structures" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Struct<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Its zero value is composed of all fields with zero values. In this sense, it is
+like an array, just that we can have name each element.</p>
+<p>A struct cannot contain itself, but can contain itself’s pointer. It is passed
+by value.</p>
+<p>A struct is comparable if all fields are comparable, like an array in this sense.</p>
+</div>
+<div class="section" id="string">
+<h3>String<a class="headerlink" href="#string" title="Permalink to this headline">¶</a></h3>
+<p>It is a basic type in Go. It supports UTF-8 natively. However, built-in functions
+<code class="docutils literal notranslate"><span class="pre">len</span></code> and <code class="docutils literal notranslate"><span class="pre">index</span></code> works on bytes instead of runes (characters?). <code class="docutils literal notranslate"><span class="pre">range</span></code> will
+decode bytes into UTF-8 characters where index is still based on bytes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="p">:</span><span class="o">=</span> <span class="nb">range</span> <span class="s2">&quot;Hello, Image&quot;</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\t</span><span class="s2">%q</span><span class="se">\t</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A string is immutable. <code class="docutils literal notranslate"><span class="pre">s[i:j]</span></code> will generate a new substring. <code class="docutils literal notranslate"><span class="pre">[]rune</span></code> can be
+used to conversion a string into a slice of UTF-8 chars. <code class="docutils literal notranslate"><span class="pre">[]byte</span></code> and <code class="docutils literal notranslate"><span class="pre">string</span></code>
+can be converted between them.</p>
+<p>Comparison between two strings are done byte by byte.</p>
+<p><code class="docutils literal notranslate"><span class="pre">...</span></code> -&gt; raw string to keep backslash, newlines etc.</p>
+</div>
+<div class="section" id="array">
+<h3>Array<a class="headerlink" href="#array" title="Permalink to this headline">¶</a></h3>
+<p>fixed-size sequence, like <code class="docutils literal notranslate"><span class="pre">[3]int{1,</span> <span class="pre">2,</span> <span class="pre">3}</span></code> or <code class="docutils literal notranslate"><span class="pre">[...]int{1,</span> <span class="pre">2}</span></code> or <code class="docutils literal notranslate"><span class="pre">[...]int{99:-1}</span></code>.
+Two arrays are comparable if elements are comparable.</p>
+</div>
 <div class="section" id="map">
 <h3>Map<a class="headerlink" href="#map" title="Permalink to this headline">¶</a></h3>
-<p>A map, like <code class="docutils literal notranslate"><span class="pre">map[string]string</span></code> is passed by reference. (Not a consistent
-desgin. Especially when you only look at paramemters of functions which
-consist of pointers, maps etc). Or not really, if regarding a map as a struct
-with internal pointers, then we pass value for the struct, but reference for
-the map.</p>
+<p>Keys are distinct and unordered. A map is passed by reference (regarding as a
+struct of pointer fields).</p>
+<p>One can look up a non-existence key whose value will be <strong>zero value</strong>, but <code class="docutils literal notranslate"> <span class="pre">val,</span> <span class="pre">ok</span> <span class="pre">=</span> <span class="pre">a_map[key]</span></code> can be used to check if a key really exists or not. One
+cannot take address of an element of a map.</p>
+</div>
+</div>
+<div class="section" id="goroutine">
+<h2>Goroutine<a class="headerlink" href="#goroutine" title="Permalink to this headline">¶</a></h2>
+<p>There is a goroutine leak. Goroutine should ensure it can terminate, otherwise
+there is a leak which would not be garbage collected.</p>
+</div>
+<div class="section" id="channels">
+<h2>Channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h2>
+<p>channels are comparable. Two are equal when their references are same.</p>
+<p>A channel can be closed for sending. Panic happens when sending again. Receiving
+can still be going. When no more value sent, zero value will be received. <code class="docutils literal notranslate"><span class="pre">range</span></code>
+can be used with channels to determine if it has been closed or not.</p>
+<p>Bidirectional channels can be converted to unidirectional channels implicitly,
+but there is no way back.</p>
+<p>Beware of a buffered channel of 1. With buffered channel, receiver and sender
+are separated by the queue. Receiver and sender they communicate with the queue.</p>
+<p><strong>unbuffered</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">receiver</span> <span class="o">&lt;-</span> <span class="n">sender</span>
+</pre></div>
+</div>
+<p><strong>buffered</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>            <span class="p">[</span> <span class="p">]</span> <span class="o">&lt;-</span> <span class="n">sender</span>
+            <span class="p">[</span><span class="n">X</span><span class="p">]</span>
+<span class="n">receiver</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="n">X</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">select</span> <span class="p">{</span>
+<span class="n">case</span> <span class="o">&lt;-</span><span class="n">ch1</span><span class="p">:</span>
+    <span class="o">//</span> <span class="o">...</span>
+<span class="n">case</span> <span class="n">x</span> <span class="p">:</span><span class="o">=</span> <span class="o">&lt;-</span><span class="n">ch2</span><span class="p">:</span>
+    <span class="o">//</span> <span class="o">...</span><span class="n">use</span> <span class="n">x</span><span class="o">...</span>
+<span class="n">case</span> <span class="n">ch3</span> <span class="o">&lt;-</span> <span class="n">y</span><span class="p">:</span>
+    <span class="o">//</span> <span class="o">...</span>
+<span class="n">default</span><span class="p">:</span>
+    <span class="o">//</span> <span class="o">...</span>
+<span class="p">}</span>
+<span class="o">//</span> <span class="n">If</span> <span class="n">multiple</span> <span class="n">cases</span> <span class="n">are</span> <span class="n">ready</span><span class="p">,</span> <span class="n">select</span> <span class="n">picks</span> <span class="n">one</span> <span class="n">at</span> <span class="n">random</span><span class="p">,</span>
+<span class="o">//</span> <span class="n">It</span> <span class="n">will</span> <span class="n">block</span> <span class="k">if</span> <span class="n">no</span> <span class="n">one</span> <span class="ow">is</span> <span class="n">ready</span>
+<span class="o">//</span> <span class="n">With</span> <span class="n">default</span><span class="p">,</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">like</span> <span class="n">polling</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -198,7 +356,7 @@ the map.</p>
 <li class="toctree-l2"><a class="reference internal" href="../jmeter.html">Notes for Using JMeter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../aws/ec2-storage.html">Notes for EC2 Storage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../docker/data-management.html">Notes for Docker Data Management</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Notes for Golang General</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">General Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../bookshelf/index.html">Bookshelf</a></li>
