@@ -1,4 +1,4 @@
-## Notes for EC2 Storage
+## EC2 Storage
 
 ### Common
 1. Device naming could be changed over configuration and actual instance. 

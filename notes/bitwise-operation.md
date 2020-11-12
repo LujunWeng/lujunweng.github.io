@@ -1,4 +1,4 @@
-# Notes for Bitwise Operation
+# Bitwise Operation
 
 ## Operators
 

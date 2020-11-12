@@ -1,4 +1,4 @@
-# Notes for Using JMeter
+# Using JMeter
 
 ## General
 
