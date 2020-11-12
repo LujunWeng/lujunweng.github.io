@@ -1,4 +1,4 @@
-# General Notes on Golang
+# Notes for Golang General
 
 ## Basics
 Go code <- packages <- Go files __in a directory__

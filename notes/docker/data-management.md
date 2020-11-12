@@ -1,4 +1,4 @@
-# Data Management
+# Notes for Docker Data Management 
 
 ## Storing in the host machine
 There are two options: volumes and bind mounts.
