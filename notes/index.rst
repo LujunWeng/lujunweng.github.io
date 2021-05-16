@@ -5,5 +5,6 @@ notes
    :titlesonly:
    :glob:
 
+   first-home-australia/index
    *
    **/*
