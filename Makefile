@@ -5,3 +5,7 @@ BUILDDIR      = docs
 
 html: Makefile
 	@$(SPHINXBUILD) "$(SOURCEDIR)" "$(BUILDDIR)"
+
+all: html
+	git add -A && git commit -v
+	git push
