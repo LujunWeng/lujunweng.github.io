@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>EC2 Storage &#8212; LW&#39;s Home  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="ec2-storage">
+<h1>EC2 Storage<a class="headerlink" href="#ec2-storage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="common">
+<h2>Common<a class="headerlink" href="#common" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Device naming could be changed over configuration and actual instance.</p></li>
+</ol>
+</div>
+<div class="section" id="amazon-elastic-block-store">
+<h2>Amazon Elastic Block Store<a class="headerlink" href="#amazon-elastic-block-store" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>It is durable, block-level storage volumes and recommended for database</p></li>
+<li><p>Can one volume be attached to multiple instances?</p>
+<blockquote>
+<div><p>An EBS volume can be attached to only one instance at a time, but multiple volumes can be attached to a single instance.</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="amazon-ec2-instance-store">
+<h2>Amazon EC2 Instance Store<a class="headerlink" href="#amazon-ec2-instance-store" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Instance’s own storage; it’s temporary and data will be lost when instance stopped or terminated</p></li>
+</ol>
+</div>
+<div class="section" id="amazon-efs-file-system">
+<h2>Amazon EFS File System<a class="headerlink" href="#amazon-efs-file-system" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>scalable file storage and needs be mounted.</p></li>
+<li><p>can work as a common data source for multiple instances</p></li>
+</ol>
+</div>
+<div class="section" id="amazon-s3">
+<h2>Amazon S3<a class="headerlink" href="#amazon-s3" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html">Storage, User Guide</a></p></li>
+<li><p><a class="reference external" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html">Device Naming</a></p></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">LW's Home</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../blog/2020/index.html">2020</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../blog/2019/index.html">2019</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bookshelf/index.html">Bookshelf</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Lujun Weng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

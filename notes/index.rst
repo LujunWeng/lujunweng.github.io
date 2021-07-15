@@ -5,5 +5,5 @@ notes
    :titlesonly:
    :glob:
 
-   *
-   **/*
+   cooking/index
+   golang/general-notes

@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Docker Data Management &#8212; LW&#39;s Home  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="docker-data-management">
+<h1>Docker Data Management<a class="headerlink" href="#docker-data-management" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="storing-in-the-host-machine">
+<h2>Storing in the host machine<a class="headerlink" href="#storing-in-the-host-machine" title="Permalink to this headline">¶</a></h2>
+<p>There are two options: volumes and bind mounts.</p>
+<div class="section" id="volumes">
+<h3>Volumes<a class="headerlink" href="#volumes" title="Permalink to this headline">¶</a></h3>
+<p>Managed by Docker and by default stored somewhere in the host machine.</p>
+</div>
+<div class="section" id="bind-mount">
+<h3>Bind Mount<a class="headerlink" href="#bind-mount" title="Permalink to this headline">¶</a></h3>
+<p>Mounting a file or directory on the host machine onto a container. “The file or directory is referenced by its <strong>full path</strong> on the host machine. The file or directory does not need to exist on the Docker host already. It is created on demand if it does not yet exist.”</p>
+</div>
+<div class="section" id="tmpfs-mounts">
+<h3>tmpfs mounts<a class="headerlink" href="#tmpfs-mounts" title="Permalink to this headline">¶</a></h3>
+<p>A tmpfs mount is not persisted on disk, only during the lifetime of the container. Good for mounting secrets into containers.</p>
+</div>
+<div class="section" id="how-to-specify">
+<h3>How to specify?<a class="headerlink" href="#how-to-specify" title="Permalink to this headline">¶</a></h3>
+<p>Better to use <code class="docutils literal notranslate"><span class="pre">--mount</span></code> for docker CLI and <code class="docutils literal notranslate"><span class="pre">volumes</span></code> with long syntax for docker compose file.</p>
+</div>
+<div class="section" id="questions">
+<h3>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Which type to use for database?</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://docs.docker.com/storage/#good-use-cases-for-tmpfs-mounts">Volume Overview</a></p></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">LW's Home</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../blog/2020/index.html">2020</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../blog/2019/index.html">2019</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bookshelf/index.html">Bookshelf</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Lujun Weng.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

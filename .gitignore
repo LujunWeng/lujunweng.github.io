@@ -1,3 +1,4 @@
 _sources/
 .buildinfo
 .doctrees
+.DS_store
