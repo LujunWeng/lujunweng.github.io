@@ -17,8 +17,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = "LW's Home"
-copyright = '2020, Lujun Weng'
+project = "LW"
+copyright = '2021, Lujun Weng'
 author = 'Lujun Weng'
 master_doc = 'index'
 
